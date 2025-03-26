@@ -1,9 +1,10 @@
 import axios from "axios";
-
+import { useApiKey } from './UseContect';
 const API_URL = "http://localhost:3050/api/RoadsideFriends/help"; // כתובת ה-API
 
 // פונקציה לקבלת כל הבקשות מהשרת
 export  const getRequests = async (filters = {}) => {
+  
   try {
     const queryParams = new URLSearchParams(filters).toString(); 
     const response = await axios.get(`${API_URL}?${queryParams}`);
@@ -57,13 +58,14 @@ export const deleteRequest = async (id) => {
 };
 
 export const codeAddress = async (address) => {
+  const apiKey = useApiKey();
   try {
     console.log(address);
     const addressString =  `${address.number} ${address.street}, ${address.city}, ישראל`;
     const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
       params: {
         address: addressString,
-        key: 'AIzaSyAW1fRsJhThkXhR4wlqXKZ4bX8AVRljUu4',
+        key: {apiKey}
       },
     });
 
