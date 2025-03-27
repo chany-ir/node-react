@@ -65,7 +65,7 @@ export const codeAddress = async (address) => {
     const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
       params: {
         address: addressString,
-        key: {apiKey}
+        key: apiKey
       },
     });
 
